@@ -1,0 +1,60 @@
+Yahtzee Documentation
+
+The project is the Yahtzee Game. There were a lot of different codes already on the internet but I watched this video https://www.youtube.com/watch?v=5iHfNn5eOvM&t=435s for the basics of Yahtzee. In the end I had to change something in his code because the 3 and 4 of a kinds with 1s and afterwards the full house with 1s didn't work. But in general the GUI is the main part of my project. The player can choose between 5 backgrounds, there is a highscore table and of course the main game with the dices and the different choices where I also changed the font and the colors.
+
+For this project the libraries "pygame", "random" and "os" are necessary.
+
+The code:
+At the beginning there is the import of the libraries. 
+Then there is the opening of the game, you need to mark the windowsize of the game and with how many fps you want to be able to play. I also set a display caption which you can see on the top left while playing. I imported a custom font which i found on the website dafont.com. There are many other lines which are more important later. For example line 23, 13 times false because we have 13 different choices in the game. The same goes for the variable "total": there are 7 totals and at the beginning there are all 0.
+
+class Choice:
+This is the code for the table with the different choices. Here you find the coloring of this text. When a draw is possible the text is going to be green with the rgb 79, 150, 78 and if not then it is going to be red 219, 18, 71. When it is has already been selected it is going to be black. Black is also used for the totals and bonuses which are always black because you cannot interact with them.  
+
+
+Line63 is for the black select symbol. When you select anything it will have a black background. 
+Line 64 is the position for the text that are saying 1s, 2s, Full house and so on.
+65-66 are the scores, the numbers from the different options. The numbers are blue.
+
+class Dice:
+In def draw(self) i am creating each dot on the dices. Thats why for the first dice, you only need one line of code, for the 2 you need 2 lines and so on. I also made the 1 have a little redish color.
+The "active" in this code is when you mark a die which you dont want to roll, and this is the outline of the die. 111-116 is the code for this process to be selected or not.
+
+def restart_function: 119 - 143 is bringing the code back to default after a round has been played.
+
+def make_choice 146-151 is only that a player cannot select a option two times. So you can only choose for example Full house one time.
+
+The lines 154-180 are basically drawing the GUI. It is used for the text that are on a button or are showing the score and so. Here are also the blacklines (166-171) which are dividing the GUI in different parts. Here is also the white background of the score table created (165).
+
+183-211 These functions are responsible for drawing different objects on the screen. They are defined later in the code.
+
+214-269 is for the definition of the different options. So pos_list[0] is for the 1s, pos_list[1] are the 2s and so on. They are in the same order as in the game. But you must not count the different totals options. When we have a look at the line 227, it means that there are less than 3 same dices and that is why 3 of a kind(pos_list[6]) 4 of a kind (pos_list[7]) and so on are false. I have adjusted the lines 236-250 because they didnt work. These lines are just saying how many dices there need to be the same in order to be able to select the option. In 239-244 there is the code for the full house: we have three same dice numbers, and to check if it is a full house the other two dices need to have the same dice number, thats why it need to be exactly 2. 250 is for the yahtzee, so there need to be 5 same dices thats why pos_list[11] was False until then. 252-269 are for the small and large straights. 
+
+
+272-316 are for the points for the game. 1s-6s got multiplied by the time they are rolled. 6-7, so small and large straight are going to sum up the dots of the dices. For the others there is a fix amount of points. So you get either the specified points or 0. The last one, 12, sums up all of the dice numbers because it is the "chance".
+
+def check_totals is a large addition. Because the upper score is summed up, maybe with a bonus and thats the upper total. The same is made for the lower total which is at the end summed up with the upper total and that is at the the grand total with all the bonuses included. For example if the total_list[0] is more than 62, then you get a bonus of 35points. I also put there my highscore display because there are already the number of the game. So I created a text file to have the highscores saved. Only the best 5 are shown in the game.
+
+At 367 and 368 I put the random background generator. One of the five images, which I have drawn myself, will be the "starter" background. But it can be always changed.  
+
+At 370 the game starts to run. With two buttons at the top, one for the rolling the other for accepting the turn and if the game is over another button will come up to start a new game. At 377-401 the objects are being placed in the game. The text for options is also created here.
+
+410-421 is a code written by me. Here is the code where you can choose between different backgrounds by pressing keys, in this case the keys 1-5. 
+
+The following code is for the "clicking". So when the game is over and you click on "restart" the game will restart. The "check_click" is for checking if the mouse has clicked on any of the five dice. 433-436 is for the roll button, when the mouse presses the roll button, that the possible rolls become fewer.
+
+437: When the rolls left are still 3, you cannot accept your turn. 438 when you already have a yahtzee and you have another one, then the bonus_time is available.
+
+445-449 shows the beginning of the game, where there are no dice. That is why the numbers are 7,8,9,10 and 11 because they are not defined. 
+
+450-477 are the line of codes for the different possibiles to click at. It is defining the area where you can click and therefore select an option.
+
+The lines 480-484 are for the rolling and when a die is marked that it cannot be rolled.
+
+In 486-491 there is defined that in the lower section of the game there will be a message when the selected category will not give you any points.
+
+496 is necessary that the display is updating.
+
+
+
+
